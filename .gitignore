@@ -10,3 +10,4 @@ __pycache__/
 
 # Markdown explainer files
 notes/
+model_training/fraud_model.joblib
