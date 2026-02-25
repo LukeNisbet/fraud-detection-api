@@ -1,14 +1,24 @@
+import os
 from fastapi import FastAPI
-from app.schemas import TransactionIn, FraudPredictionOut
-from app.model import calculate_fraud_risk  # Import our business logic
+from app.api import router
 
-app = FastAPI(title="Fraud Detection API")
+# Check if we are on your laptop or the live internet
+ENV = os.getenv("ENV", "development")
 
-@app.get("/")
+# Security switch: Hide Swagger UI if we are in production
+if ENV == "production":
+    app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
+else:
+    app = FastAPI(title="Fraud Detection API [DEV]")
+
+# Plug include the mapping of URLs to python functions defined in the api.py file
+app.include_router(router)
+
+@app.get("/") #this maps the "/" URL to the health check function
 def health_check():
-    return {"status": "healthy", "message": "Fraud API is running!"}
-
-@app.post("/predict", response_model=FraudPredictionOut)
-def predict_fraud(transaction: TransactionIn):
-    # The web server just hands the data to the model and returns the result
-    return calculate_fraud_risk(transaction)
+    # We add the environment here so you can verify your security settings
+    return {
+        "status": "healthy", 
+        "message": "Fraud API is running!",
+        "mode": ENV
+    }

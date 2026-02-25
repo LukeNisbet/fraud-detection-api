@@ -18,8 +18,11 @@ def test_predict_fraud_success():
     }
     response = client.post("/predict", json=payload)
     assert response.status_code == 200
-    assert response.json()["is_fraud"] == True
-    assert response.json()["account_id"] == "ACC123"
+
+    data = response.json()
+    assert data["is_fraud"] == True
+    assert data["account_id"] == "ACC123"
+    assert "fraud_probability" in data
 
 def test_predict_fraud_validation_error():
     """Test that Pydantic successfully blocks bad data."""
