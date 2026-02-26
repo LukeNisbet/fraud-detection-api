@@ -1,0 +1,57 @@
+# Version Control
+
+.git
+.gitignore
+.github/
+
+# Python Caching & Bytecode
+
+**pycache**/
+_.pyc
+_.pyo
+\*.pyd
+.Python
+
+# Virtual Environments (Covers common naming conventions)
+
+venv/
+.venv/
+env/
+.env_dir/
+
+# Environment Variables (Critical Security)
+
+.env
+.env.\*
+_.pem
+_.key
+
+# Testing Artifacts
+
+.pytest_cache/
+tests/
+.coverage
+htmlcov/
+.tox/
+
+# Local Data Science Files
+
+_.csv
+_.tsv
+_.parquet
+_.xlsx
+.ipynb_checkpoints/
+\*.ipynb
+
+# IDE & OS Configurations
+
+.vscode/
+.idea/
+\*.swp
+.DS_Store
+Thumbs.db
+
+# Local Output Files
+
+notes/
+\*.log
